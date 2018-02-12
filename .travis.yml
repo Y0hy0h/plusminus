@@ -1,6 +1,10 @@
+sudo: required
 language: node_js
 cache:
   directories:
     - "node_modules"
 node_js:
   - "node"
+script:
+  - yarn test
+  - xvfb-run yarn e2e
