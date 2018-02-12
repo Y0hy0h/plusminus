@@ -3,10 +3,24 @@
 
 module.exports = {
   'Smoke test': browser => {
-    browser
-      .url(process.env.VUE_DEV_SERVER_URL)
-      .waitForElementVisible('#app', 5000)
+    const page = browser.page.overview()
+
+    page.navigate()
       .assert.title('PlusMinus')
-      .end()
+  },
+
+  'Expense addition': browser => {
+    const page = browser.page.overview()
+
+    page.navigate()
+      .setValue('@newExpenseAmount', '81502')
+      .setValue('@newExpenseDescription', 'Dummy Expense')
+      .click('@saveButton')
+      .assert.containsText('@expenseList', '81502')
+      .assert.containsText('@expenseList', 'Dummy Expense')
+  },
+
+  after: browser => {
+    browser.end()
   }
 }

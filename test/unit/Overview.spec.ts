@@ -3,7 +3,7 @@ import {shallow} from '@vue/test-utils'
 import Overview from '@/components/Overview.vue'
 
 describe('Overview.vue', () => {
-  it('renders props.msg when passed', () => {
+  it('list all expenses in prop', () => {
     const allExpenses = [
       new Expense(100),
       new Expense(200),
