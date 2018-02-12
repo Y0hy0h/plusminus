@@ -1,7 +1,23 @@
 <template>
     <div id="app">
+        <Overview/>
     </div>
 </template>
+
+
+<script lang="ts">
+  import Overview from '@/components/Overview.vue'
+  import { Component, Vue } from 'vue-property-decorator'
+
+  @Component({
+    components: {
+      Overview,
+    },
+  })
+  export default class App extends Vue {
+  }
+</script>
+
 
 <style>
     #app {
