@@ -5,16 +5,12 @@
 </template>
 
 <script lang="ts">
-  import { Expense } from '@/model/expense'
-  import { Component, Vue } from 'vue-property-decorator'
+  import {Expense} from '@/model/expense'
+  import {Component, Prop, Vue} from 'vue-property-decorator'
 
   @Component
   export default class Overview extends Vue {
-    public allExpenses: Expense[] = [
-      new Expense(100),
-      new Expense(200),
-      new Expense(300),
-    ]
+    @Prop() private allExpenses!: Expense[]
   }
 </script>
 
