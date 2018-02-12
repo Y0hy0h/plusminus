@@ -8,7 +8,6 @@
 <script lang="ts">
   import Overview from '@/components/Overview.vue'
   import {Component, Vue} from 'vue-property-decorator'
-  import {Expense} from './model/expense'
 
   @Component({
     components: {
@@ -16,11 +15,7 @@
     },
     data() {
       return {
-        allExpenses: [
-          new Expense(100),
-          new Expense(200),
-          new Expense(300),
-        ],
+        allExpenses: [],
       }
     },
   })
