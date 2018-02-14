@@ -30,7 +30,7 @@
   export default class ExpenseInput extends Vue {
     private amount: number = 0
     private description: string = ''
-    private date: string = ''
+    private date: string = new Date().toISOString().slice(0, 10)
 
     private saveExpense() {
       const date = new Date(this.date)
