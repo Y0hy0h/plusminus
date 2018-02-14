@@ -4,6 +4,16 @@
             <v-card-text>
                 <v-text-field label="Amount" suffix="€" v-model="amount" type="number" class="amount"/>
                 <v-text-field label="Description" v-model="description" type="text" class="description"/>
+                <v-menu min-width="290px" full-width
+                        offset-y
+                        :nudge-right="40">
+                    <v-text-field slot="activator" label="Date" v-model="date" prepend-icon="event" readonly/>
+                    <v-date-picker v-model="date" no-title scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+                        <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                    </v-date-picker>
+                </v-menu>
             </v-card-text>
             <v-card-actions>
                 <v-btn @click="saveExpense" class="save">Save</v-btn>
@@ -20,9 +30,11 @@
   export default class ExpenseInput extends Vue {
     private amount: number = 0
     private description: string = ''
+    private date: string = ''
 
     private saveExpense() {
-      const newExpense = new Expense(this.amount, this.description)
+      const date = new Date(this.date)
+      const newExpense = new Expense(this.amount, this.description, date)
       this.$emit('save-expense', newExpense)
     }
   }
