@@ -22,6 +22,8 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+    .new-expense
+        display: flex
+        flex-direction: column
 </style>

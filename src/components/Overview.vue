@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="overview">
         <ExpenseInput @save-expense="saveExpense"/>
         <ExpenseList :all-expenses="allExpenses"/>
     </div>
@@ -26,6 +26,8 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+    .overview
+        margin: auto
+        width: 800px
 </style>
