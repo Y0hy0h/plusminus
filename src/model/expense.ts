@@ -1,4 +1,4 @@
 export class Expense {
-  constructor(public cents: number, public description: string) {
+  constructor(public cents: number, public description: string = '') {
   }
 }
