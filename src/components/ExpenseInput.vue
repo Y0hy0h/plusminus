@@ -1,9 +1,15 @@
 <template>
-    <div class="new-expense">
-        <input v-model="amount" type="number" class="amount"/>
-        <input v-model="description" type="text" class="description"/>
-        <button @click="saveExpense" class="save">Save</button>
-    </div>
+    <v-form class="new-expense">
+        <v-card>
+            <v-card-text>
+                <v-text-field label="Amount" suffix="€" v-model="amount" type="number" class="amount"/>
+                <v-text-field label="Description" v-model="description" type="text" class="description"/>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn @click="saveExpense" class="save">Save</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-form>
 </template>
 
 <script lang="ts">
@@ -22,8 +28,5 @@
   }
 </script>
 
-<style scoped lang="sass">
-    .new-expense
-        display: flex
-        flex-direction: column
+<style scoped lang="stylus">
 </style>

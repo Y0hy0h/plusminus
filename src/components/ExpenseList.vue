@@ -14,7 +14,7 @@
   }
 </script>
 
-<style scoped lang="sass">
+<style scoped lang="stylus">
     .expense-list
         text-align: left
 </style>

@@ -26,8 +26,5 @@
   }
 </script>
 
-<style scoped lang="sass">
-    .overview
-        margin: auto
-        width: 800px
+<style scoped lang="stylus">
 </style>
