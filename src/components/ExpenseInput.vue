@@ -67,4 +67,6 @@
 </script>
 
 <style scoped lang="stylus">
+    .amount /deep/ input
+        text-align: right
 </style>
