@@ -6,6 +6,6 @@ describe('ExpenseInput.vue', () => {
     const today = new Date('2018-02-14')
     global.Date = jest.fn(() => today)
     const wrapper = shallow(ExpenseInput)
-    expect(wrapper.vm.date).toEqual('2018-02-14')
+    expect(wrapper.vm.dateString).toEqual('2018-02-14')
   })
 })

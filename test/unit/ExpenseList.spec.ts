@@ -14,7 +14,7 @@ describe('ExpenseList.vue', () => {
       },
     })
     expect(wrapper.html()).toContain('123')
-    expect(wrapper.html()).toContain('2018-02-12')
+    expect(wrapper.html()).toContain('2018-02-13')
     expect(wrapper.html()).toContain('456')
     expect(wrapper.html()).toContain('2018-02-14')
   })
