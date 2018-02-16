@@ -3,7 +3,7 @@
         <v-app>
             <v-content>
                 <v-container>
-                    <Overview :allExpenses="allExpenses"/>
+                    <Overview/>
                 </v-container>
             </v-content>
         </v-app>
@@ -13,16 +13,11 @@
 
 <script lang="ts">
   import Overview from '@/components/Overview.vue'
-  import {Component, Vue} from 'vue-property-decorator'
+  import { Component, Vue } from 'vue-property-decorator'
 
   @Component({
     components: {
       Overview,
-    },
-    data() {
-      return {
-        allExpenses: [],
-      }
     },
   })
   export default class App extends Vue {

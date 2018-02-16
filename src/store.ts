@@ -1,16 +1,25 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex, { MutationTree } from 'vuex'
+import { Expense } from '@/model/expense'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
+class State {
+  public allExpenses: Expense[] = []
+}
 
+export enum mutations {
+  ADD_EXPENSE = 'add-expense',
+}
+
+const mutationTree: MutationTree<State> = {
+  [mutations.ADD_EXPENSE](state: State, payload: { expense: Expense }): void {
+    state.allExpenses.push(payload.expense)
   },
-  mutations: {
+}
 
-  },
-  actions: {
-
-  },
-});
+export default new Vuex.Store<State>({
+  state: new State(),
+  mutations: mutationTree,
+  actions: {},
+})

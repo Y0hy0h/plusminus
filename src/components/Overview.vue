@@ -6,10 +6,11 @@
 </template>
 
 <script lang="ts">
-  import {Expense} from '@/model/expense'
+  import { Expense } from '@/model/expense'
   import ExpenseInput from '@/components/ExpenseInput.vue'
   import ExpenseList from '@/components/ExpenseList.vue'
-  import {Component, Prop, Vue} from 'vue-property-decorator'
+  import { Component, Vue } from 'vue-property-decorator'
+  import { mutations } from '@/store'
 
   @Component({
     components: {
@@ -18,10 +19,15 @@
     },
   })
   export default class Overview extends Vue {
-    @Prop() private allExpenses!: Expense[]
+    private amount: number = 0
 
-    public saveExpense(expense: Expense): void {
-      this.allExpenses.push(expense)
+    get allExpenses(): Expense[] {
+      return this.$store.state.allExpenses
+    }
+
+    public saveExpense(): void {
+      const expense = new Expense(this.amount)
+      this.$store.commit(mutations.ADD_EXPENSE, {expense})
     }
   }
 </script>
