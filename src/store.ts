@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex, { MutationTree } from 'vuex'
 import { Expense } from '@/model/expense'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
 
@@ -18,8 +19,15 @@ const mutationTree: MutationTree<State> = {
   },
 }
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+})
+
 export default new Vuex.Store<State>({
   state: new State(),
   mutations: mutationTree,
   actions: {},
+  plugins: [
+    vuexLocal.plugin,
+  ],
 })
