@@ -3,7 +3,7 @@
         <v-list-tile v-for="expense in allExpenses" :key="expense.cents">
             <v-list-tile-content>
                 <v-list-tile-title>{{ expense.cents }}</v-list-tile-title>
-                <v-list-tile-sub-title>{{ expense.date.toLocaleDateString() }} | {{ expense.description }}
+                <v-list-tile-sub-title>{{ dateString(expense.date) }} | {{ expense.description }}
                 </v-list-tile-sub-title>
             </v-list-tile-content>
         </v-list-tile>
@@ -17,6 +17,11 @@
   @Component
   export default class ExpenseList extends Vue {
     @Prop() private allExpenses!: Expense[]
+
+    public dateString(date: Date) {
+      const formatOptions = {day: '2-digit', month: '2-digit', year: 'numeric'}
+      return date.toLocaleDateString(undefined, formatOptions)
+    }
   }
 </script>
 

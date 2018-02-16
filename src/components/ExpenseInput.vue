@@ -33,8 +33,9 @@
     private date: string = new Date().toISOString().slice(0, 10)
 
     private saveExpense() {
+      const cents = parseInt(this.amount as string, 10)
       const date = new Date(this.date)
-      const newExpense = new Expense(this.amount, this.description, date)
+      const newExpense = new Expense(cents, date, this.description)
       this.$emit('save-expense', newExpense)
     }
   }
