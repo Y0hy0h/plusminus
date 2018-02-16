@@ -12,12 +12,15 @@ module.exports = {
   'Expense addition': browser => {
     const page = browser.page.overview()
 
+    const expectedFormattedAmount = /(\$ ?)?815[.,]?02( ?€)?/ // allow different formats for robustness
+
     page.navigate()
       .setValue('@newExpenseAmount', '81502')
-      .setValue('@newExpenseDescription', 'Dummy Expense')
+    page.expect.element('@newExpenseAmount').value.to.match(expectedFormattedAmount)
+    page.setValue('@newExpenseDescription', 'Dummy Expense')
       .click('@saveButton')
-      .assert.containsText('@expenseList', '81502')
-      .assert.containsText('@expenseList', 'Dummy Expense')
+    page.expect.element('@expenseList').text.to.match(expectedFormattedAmount)
+    page.assert.containsText('@expenseList', 'Dummy Expense')
   },
 
   after: browser => {
