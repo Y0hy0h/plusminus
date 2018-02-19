@@ -1,6 +1,6 @@
-import {shallow} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import ExpenseList from '@/components/ExpenseList.vue'
-import {Expense} from '@/model/expense'
+import { Expense } from '@/model/expense'
 
 describe('ExpenseList.vue', () => {
   it('it should display all expenses in props', () => {
@@ -8,7 +8,7 @@ describe('ExpenseList.vue', () => {
       new Expense(123, new Date('2018-02-13')),
       new Expense(456, new Date('2018-02-14')),
     ]
-    const wrapper = shallow(ExpenseList, {
+    const wrapper = mount(ExpenseList, {
       propsData: {
         allExpenses,
       },
