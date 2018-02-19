@@ -1,16 +1,16 @@
 <template>
     <div class="overview">
         <ExpenseInput @save-expense="saveExpense"/>
-        <ExpenseList :all-expenses="allExpenses"/>
+        <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense"/>
     </div>
 </template>
 
 <script lang="ts">
-  import {Expense} from '@/model/expense'
+  import { Expense } from '@/model/expense'
   import ExpenseInput from '@/components/ExpenseInput.vue'
   import ExpenseList from '@/components/ExpenseList.vue'
-  import {Component, Vue} from 'vue-property-decorator'
-  import {mutations} from '@/store'
+  import { Component, Vue } from 'vue-property-decorator'
+  import { mutations } from '@/store'
 
   @Component({
     components: {
@@ -25,6 +25,10 @@
 
     public saveExpense(expense: Expense): void {
       this.$store.commit(mutations.ADD_EXPENSE, {expense})
+    }
+
+    public deleteExpense(expense: Expense): void {
+      this.$store.commit(mutations.DELETE_EXPENSE, {expense})
     }
   }
 </script>

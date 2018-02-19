@@ -1,6 +1,11 @@
 <template>
     <v-list two-line class="expense-list">
-        <ExpenseItem :expense="expense" v-for="expense in allExpenses" :key="expense.cents"/>
+        <ExpenseItem
+                :expense="expense"
+                v-for="expense in allExpenses"
+                :key="expense.cents"
+                @delete-expense="deleteExpense"
+        />
     </v-list>
 </template>
 
@@ -16,6 +21,10 @@
   })
   export default class ExpenseList extends Vue {
     @Prop() private allExpenses!: Expense[]
+
+    public deleteExpense(expense: Expense) {
+      this.$emit('delete-expense', expense)
+    }
   }
 </script>
 
