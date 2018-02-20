@@ -50,19 +50,27 @@
 
 <script lang="ts">
   import { Expense } from '@/model/expense'
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 
   @Component
   export default class ExpenseInput extends Vue {
     @Prop() private expenseToUpdate!: Expense | null
 
+    private expense: Expense
     private dateMenu: boolean = false
 
-    get expense(): Expense {
-      if (this.expenseToUpdate === null) {
-        this.expenseToUpdate = new Expense(0, new Date())
+    constructor() {
+      super()
+      this.expense = this.expenseToUpdate || this.getDefaultExpense()
+    }
+
+    @Watch('expenseToUpdate')
+    public onExpenseChange(val: Expense | null, oldVal: Expense | null) {
+      if (val === null) {
+        this.expense = this.getDefaultExpense()
+      } else {
+        this.expense = val
       }
-      return this.expenseToUpdate
     }
 
     get dateString(): string {
@@ -75,6 +83,7 @@
 
     public saveExpense() {
       this.$emit('save-expense', this.expense)
+      this.expense = this.getDefaultExpense()
     }
 
     public updateAmount(event: KeyboardEvent) {
@@ -86,6 +95,9 @@
       }
     }
 
+    private getDefaultExpense() {
+      return new Expense(0, new Date())
+    }
   }
 </script>
 
