@@ -1,6 +1,6 @@
 <template>
     <div class="overview">
-        <ExpenseInput :expenseToUpdate="activeExpense" @save-expense="saveExpense"/>
+        <ExpenseInput :expenseToUpdate="activeExpense" @commit-expense="commitExpense"/>
         <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected"/>
     </div>
 </template>
@@ -29,9 +29,13 @@
       this.activeExpense = expense
     }
 
-    public saveExpense(expense: Expense): void {
+    public commitExpense(expense: Expense): void {
+      if (this.activeExpense === null) {
+        this.$store.commit(mutations.ADD_EXPENSE, {expense})
+      } else {
+        this.$store.commit(mutations.UPDATE_EXPENSE, {oldExpense: this.activeExpense, newExpense: expense})
+      }
       this.activeExpense = null
-      this.$store.commit(mutations.ADD_EXPENSE, {expense})
     }
 
     public deleteExpense(expense: Expense): void {

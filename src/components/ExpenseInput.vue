@@ -42,7 +42,7 @@
                 </v-menu>
             </v-card-text>
             <v-card-actions>
-                <v-btn @click="saveExpense" class="save">Save</v-btn>
+                <v-btn @click="commitExpense" class="save">{{ expenseToUpdate === null ? 'Save' : 'Update' }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-form>
@@ -51,6 +51,7 @@
 <script lang="ts">
   import { Expense } from '@/model/expense'
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+  import { cloneDeep } from 'lodash'
 
   @Component
   export default class ExpenseInput extends Vue {
@@ -61,7 +62,7 @@
 
     constructor() {
       super()
-      this.expense = this.expenseToUpdate || this.getDefaultExpense()
+      this.expense = cloneDeep(this.expenseToUpdate) || this.getDefaultExpense()
     }
 
     @Watch('expenseToUpdate')
@@ -69,7 +70,7 @@
       if (val === null) {
         this.expense = this.getDefaultExpense()
       } else {
-        this.expense = val
+        this.expense = cloneDeep(val)
       }
     }
 
@@ -81,8 +82,8 @@
       this.expense.date = new Date(dateString)
     }
 
-    public saveExpense() {
-      this.$emit('save-expense', this.expense)
+    public commitExpense() {
+      this.$emit('commit-expense', this.expense)
       this.expense = this.getDefaultExpense()
     }
 

@@ -12,6 +12,7 @@ class State {
 export enum mutations {
   ADD_EXPENSE = 'add-expense',
   DELETE_EXPENSE = 'delete-expense',
+  UPDATE_EXPENSE = 'update-expense',
 }
 
 const mutationTree: MutationTree<State> = {
@@ -23,6 +24,10 @@ const mutationTree: MutationTree<State> = {
     if (index > -1) {
       state.allExpenses.splice(index, 1)
     }
+  },
+  [mutations.UPDATE_EXPENSE](state: State, payload: { oldExpense: Expense, newExpense: Expense }): void {
+    const index = state.allExpenses.indexOf(payload.oldExpense)
+    Vue.set(state.allExpenses, index, payload.newExpense)
   },
 }
 

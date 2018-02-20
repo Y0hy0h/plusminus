@@ -3,7 +3,6 @@
         <ExpenseItem
                 :expense="expense"
                 v-for="expense in allExpenses"
-                :key="expense.cents"
                 @delete-expense="deleteExpense"
                 @selected="itemSelected"
         />
