@@ -1,20 +1,20 @@
 <template>
     <div class="overview">
-        <ExpenseInput :expenseToUpdate="activeExpense" @commit-expense="commitExpense"/>
+        <ExpenseCreation @commit-expense="commitExpense"/>
         <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected"/>
     </div>
 </template>
 
 <script lang="ts">
   import { Expense } from '@/model/expense'
-  import ExpenseInput from '@/components/ExpenseInput.vue'
+  import ExpenseCreation from '@/components/ExpenseInput/ExpenseCreation.vue'
   import ExpenseList from '@/components/ExpenseList.vue'
   import { Component, Vue } from 'vue-property-decorator'
   import { mutations } from '@/store'
 
   @Component({
     components: {
-      ExpenseInput,
+      ExpenseCreation,
       ExpenseList,
     },
   })

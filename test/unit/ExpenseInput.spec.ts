@@ -1,5 +1,5 @@
 import { shallow } from '@vue/test-utils'
-import ExpenseInput from '@/components/ExpenseInput.vue'
+import ExpenseInput from '@/components/ExpenseInput/ExpenseInput.vue'
 
 describe('ExpenseInput.vue', () => {
   it('should initialize the date to current day', () => {
