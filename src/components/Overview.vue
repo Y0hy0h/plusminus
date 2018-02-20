@@ -1,7 +1,7 @@
 <template>
     <div class="overview">
-        <ExpenseInput @save-expense="saveExpense"/>
-        <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense"/>
+        <ExpenseInput :expenseToUpdate="activeExpense" @save-expense="saveExpense"/>
+        <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected"/>
     </div>
 </template>
 
@@ -19,11 +19,18 @@
     },
   })
   export default class Overview extends Vue {
+    private activeExpense: Expense | null = null
+
     get allExpenses(): Expense[] {
       return this.$store.state.allExpenses
     }
 
+    public itemSelected(expense: Expense): void {
+      this.activeExpense = expense
+    }
+
     public saveExpense(expense: Expense): void {
+      this.activeExpense = null
       this.$store.commit(mutations.ADD_EXPENSE, {expense})
     }
 

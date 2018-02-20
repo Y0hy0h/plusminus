@@ -5,6 +5,7 @@
                 v-for="expense in allExpenses"
                 :key="expense.cents"
                 @delete-expense="deleteExpense"
+                @selected="itemSelected"
         />
     </v-list>
 </template>
@@ -24,6 +25,10 @@
 
     public deleteExpense(expense: Expense) {
       this.$emit('delete-expense', expense)
+    }
+
+    public itemSelected(expense: Expense) {
+      this.$emit('item-selected', expense)
     }
   }
 </script>

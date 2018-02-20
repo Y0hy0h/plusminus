@@ -5,29 +5,36 @@
                 <v-text-field
                         label="Amount"
                         @keypress="updateAmount"
-                        :value="amount | currency"
+                        :value="expense.cents | currency"
                         type="text"
                         class="amount"
                         readonly
                 />
                 <v-text-field
                         label="Description"
-                        v-model="description"
+                        v-model="expense.description"
                         type="text"
                         class="description"
                 />
-                <v-menu min-width="290px" full-width offset-y :nudge-right="40">
+                <v-menu
+                        ref="menu"
+                        min-width="290px"
+                        full-width
+                        offset-y
+                        :nudge-right="40"
+                        :close-on-content-click="false"
+                >
                     <v-text-field
                             slot="activator"
                             label="Date"
-                            v-model="dateString"
+                            :value="this.expense.date.toLocaleDateString()"
                             prepend-icon="event"
                             readonly
                     />
                     <v-date-picker v-model="dateString" no-title scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-                        <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                        <v-btn flat color="primary" @click="$refs.menu.save(dateString)">OK</v-btn>
                     </v-date-picker>
                 </v-menu>
             </v-card-text>
@@ -39,27 +46,38 @@
 </template>
 
 <script lang="ts">
-  import {Expense} from '@/model/expense'
-  import {Component, Vue} from 'vue-property-decorator'
+  import { Expense } from '@/model/expense'
+  import { Component, Prop, Vue } from 'vue-property-decorator'
 
   @Component
   export default class ExpenseInput extends Vue {
-    private amount: number = 0
-    private description: string = ''
-    private dateString: string = new Date().toISOString().slice(0, 10)
+    @Prop() private expenseToUpdate!: Expense | null
 
-    public saveExpense() {
-      const date = new Date(this.dateString)
-      const newExpense = new Expense(this.amount, date, this.description)
-      this.$emit('save-expense', newExpense)
+    get expense(): Expense {
+      if (this.expenseToUpdate === null) {
+        this.expenseToUpdate = new Expense(0, new Date())
+      }
+      return this.expenseToUpdate
     }
 
-    public updateAmount(event: KeyboardEvent): void {
+    get dateString(): string {
+      return this.expense.date.toISOString().slice(0, 10)
+    }
+
+    set dateString(dateString: string) {
+      this.expense.date = new Date(dateString)
+    }
+
+    public saveExpense() {
+      this.$emit('save-expense', this.expense)
+    }
+
+    public updateAmount(event: KeyboardEvent) {
       const parsedNumber = parseInt(event.key, 10)
       if (!isNaN(parsedNumber)) {
-        this.amount = this.amount * 10 + parsedNumber
+        this.expense.cents = this.expense.cents * 10 + parsedNumber
       } else if (['Backspace', 'Delete'].includes(event.key)) {
-        this.amount = Math.floor(this.amount / 10)
+        this.expense.cents = Math.floor(this.expense.cents / 10)
       }
     }
 

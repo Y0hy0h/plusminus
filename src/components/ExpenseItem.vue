@@ -1,5 +1,5 @@
 <template>
-    <v-list-tile @click="">
+    <v-list-tile @click="itemSelected">
         <v-list-tile-content>
             <v-list-tile-title>{{ expense.cents | currency }}</v-list-tile-title>
             <v-list-tile-sub-title>{{ dateString(expense.date) }} | {{ expense.description }}
@@ -24,6 +24,10 @@
     public dateString(date: Date) {
       const formatOptions = {day: '2-digit', month: '2-digit', year: 'numeric'}
       return date.toLocaleDateString('de-DE', formatOptions)
+    }
+
+    public itemSelected() {
+      this.$emit('selected', this.expense)
     }
 
     public deleteExpense() {
