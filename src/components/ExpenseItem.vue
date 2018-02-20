@@ -30,7 +30,8 @@
       this.$emit('selected', this.expense)
     }
 
-    public deleteExpense() {
+    public deleteExpense(event: MouseEvent) {
+      event.stopPropagation()
       this.$emit('delete-expense', this.expense)
     }
   }

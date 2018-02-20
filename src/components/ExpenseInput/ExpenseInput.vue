@@ -43,16 +43,11 @@
 
 <script lang="ts">
   import { Expense } from '@/model/expense'
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Model, Vue } from 'vue-property-decorator'
 
-  @Component({
-    model: {
-      prop: 'expense',
-      event: 'change',
-    },
-  })
+  @Component
   export default class ExpenseInput extends Vue {
-    @Prop() private expense!: Expense
+    @Model('change') private expense!: Expense
 
     private dateMenu: boolean = false
 
@@ -62,14 +57,17 @@
 
     set dateString(dateString: string) {
       this.expense.date = new Date(dateString)
+      this.$emit('change', this.expense)
     }
 
     public updateAmount(event: KeyboardEvent) {
       const parsedNumber = parseInt(event.key, 10)
       if (!isNaN(parsedNumber)) {
         this.expense.cents = this.expense.cents * 10 + parsedNumber
+        this.$emit('change', this.expense)
       } else if (['Backspace', 'Delete'].includes(event.key)) {
         this.expense.cents = Math.floor(this.expense.cents / 10)
+        this.$emit('change', this.expense)
       }
     }
   }

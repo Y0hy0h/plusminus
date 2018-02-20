@@ -1,6 +1,7 @@
 <template>
     <div class="overview">
-        <ExpenseCreation @commit-expense="commitExpense"/>
+        <ExpenseCreation v-if="activeExpense === null" @commit-expense="commitExpense"/>
+        <ExpenseUpdate v-else :expense-to-update="activeExpense" @commit-expense="commitExpense" @cancel="cancel"/>
         <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected"/>
     </div>
 </template>
@@ -8,6 +9,7 @@
 <script lang="ts">
   import { Expense } from '@/model/expense'
   import ExpenseCreation from '@/components/ExpenseInput/ExpenseCreation.vue'
+  import ExpenseUpdate from '@/components/ExpenseInput/ExpenseUpdate.vue'
   import ExpenseList from '@/components/ExpenseList.vue'
   import { Component, Vue } from 'vue-property-decorator'
   import { mutations } from '@/store'
@@ -15,6 +17,7 @@
   @Component({
     components: {
       ExpenseCreation,
+      ExpenseUpdate,
       ExpenseList,
     },
   })
@@ -38,7 +41,14 @@
       this.activeExpense = null
     }
 
+    public cancel(): void {
+      this.activeExpense = null
+    }
+
     public deleteExpense(expense: Expense): void {
+      if (expense === this.activeExpense) {
+        this.cancel()
+      }
       this.$store.commit(mutations.DELETE_EXPENSE, {expense})
     }
   }
