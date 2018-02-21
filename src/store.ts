@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import Vuex, { MutationTree } from 'vuex'
-import { Expense } from '@/model/expense'
 import VuexPersistence from 'vuex-persist'
+
+import localForage from 'localforage'
+import { autoserializeAs, Deserialize } from 'cerialize'
+
+import { Expense } from '@/model/expense'
 
 Vue.use(Vuex)
 
 class State {
-  public allExpenses: Expense[] = []
+  @autoserializeAs(Expense) public allExpenses: Expense[] = []
 }
 
 export enum mutations {
@@ -32,8 +36,16 @@ const mutationTree: MutationTree<State> = {
 }
 
 const vuexLocal = new VuexPersistence({
-  storage: window.localStorage,
+  strictMode: process.env.NODE_ENV !== 'production',
+  storage: localForage,
+  async restoreState(key: string): Promise<State> {
+    const state = await localForage.getItem(key)
+    const deserialized = Deserialize(state, State)
+    return deserialized
+  },
+  asyncStorage: true,
 })
+mutationTree.RESTORE_MUTATION = vuexLocal.RESTORE_MUTATION
 
 export default new Vuex.Store<State>({
   strict: process.env.NODE_ENV !== 'production',
@@ -41,6 +53,6 @@ export default new Vuex.Store<State>({
   mutations: mutationTree,
   actions: {},
   plugins: [
-    // vuexLocal.plugin,
+    vuexLocal.plugin,
   ],
 })
