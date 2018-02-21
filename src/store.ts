@@ -36,6 +36,7 @@ const vuexLocal = new VuexPersistence({
 })
 
 export default new Vuex.Store<State>({
+  strict: process.env.NODE_ENV !== 'production',
   state: new State(),
   mutations: mutationTree,
   actions: {},
