@@ -1,12 +1,9 @@
-<template>
-    <v-card>
-        <v-card-text>
-            <ExpenseInput v-model="expense"/>
-        </v-card-text>
-        <v-card-actions>
-            <v-btn @click="commitExpense">Save</v-btn>
-        </v-card-actions>
-    </v-card>
+<template lang="pug">
+    v-card
+        v-card-text
+            ExpenseInput(v-model="expense")
+        v-card-actions
+            v-btn(@click="commitExpense") Save
 </template>
 
 <script lang="ts">

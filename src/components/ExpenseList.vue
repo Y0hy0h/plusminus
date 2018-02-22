@@ -1,12 +1,11 @@
-<template>
-    <v-list two-line class="expense-list">
-        <ExpenseItem
-                :expense="expense"
-                v-for="expense in allExpenses"
-                @delete-expense="deleteExpense"
-                @selected="itemSelected"
-        />
-    </v-list>
+<template lang="pug">
+    v-list(two-line class="expense-list")
+        ExpenseItem(
+        :expense="expense"
+        v-for="expense in allExpenses"
+        @delete-expense="deleteExpense"
+        @selected="itemSelected"
+        )
 </template>
 
 <script lang="ts">

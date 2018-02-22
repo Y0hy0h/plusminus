@@ -1,9 +1,8 @@
-<template>
-    <div class="overview">
-        <ExpenseCreation v-if="activeExpense === null" @commit-expense="commitExpense"/>
-        <ExpenseUpdate v-else :expense-to-update="activeExpense" @commit-expense="commitExpense" @cancel="cancel"/>
-        <ExpenseList :all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected"/>
-    </div>
+<template lang="pug">
+    .overview
+        ExpenseCreation(v-if="activeExpense === null" @commit-expense="commitExpense")
+        ExpenseUpdate(v-else :expense-to-update="activeExpense" @commit-expense="commitExpense" @cancel="cancel")
+        ExpenseList(:all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected")
 </template>
 
 <script lang="ts">

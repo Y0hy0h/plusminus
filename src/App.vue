@@ -1,13 +1,9 @@
-<template>
-    <div id="app">
-        <v-app>
-            <v-content>
-                <v-container>
-                    <Overview/>
-                </v-container>
-            </v-content>
-        </v-app>
-    </div>
+<template lang="pug">
+    #app
+        v-app
+            v-content
+                v-container
+                    Overview
 </template>
 
 

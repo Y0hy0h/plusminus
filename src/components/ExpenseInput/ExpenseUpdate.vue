@@ -1,22 +1,19 @@
-<template>
-    <v-card>
-        <v-card-text>
-            <ExpenseInput v-model="expense"/>
-        </v-card-text>
-        <v-card-actions>
-            <v-btn :disabled="!expenseChanged" @click="commitExpense">Update</v-btn>
-            <v-btn @click="cancel">Cancel</v-btn>
-        </v-card-actions>
-    </v-card>
+<template lang="pug">
+    v-card
+        v-card-text
+            ExpenseInput(v-model="expense")
+        v-card-actions
+            v-btn(:disabled="!expenseChanged" @click="commitExpense") Update
+            v-btn(@click="cancel") Cancel
 </template>
 
 <script lang="ts">
-import { Expense } from '@/model/expense'
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import ExpenseInput from '@/components/ExpenseInput/ExpenseInput.vue'
-import { cloneDeep, isEqual } from 'lodash'
+  import { Expense } from '@/model/expense'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+  import ExpenseInput from '@/components/ExpenseInput/ExpenseInput.vue'
+  import { cloneDeep, isEqual } from 'lodash'
 
-@Component({
+  @Component({
   components: {
     ExpenseInput,
   },

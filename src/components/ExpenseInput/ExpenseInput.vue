@@ -1,44 +1,41 @@
-<template>
-    <v-form>
-        <v-text-field
-                label="Amount"
-                @keypress="updateAmount"
-                :value="expense.cents | currency"
-                type="text"
-                class="amount"
-                readonly
-        />
-        <v-text-field
-                label="Description"
-                v-model="expense.description"
-                type="text"
-                class="description"
-        />
-        <v-menu
-                ref="menu"
-                v-model="dateMenu"
-                lazy
-                min-width="290px"
-                full-width
-                offset-y
-                :nudge-right="40"
-                :close-on-content-click="false"
-                :return-value.sync="dateString"
-        >
-            <v-text-field
-                    slot="activator"
-                    label="Date"
-                    :value="this.expense.date.toLocaleDateString()"
-                    prepend-icon="event"
-                    readonly
-            />
-            <v-date-picker v-model="dateString" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn flat color="primary" @click="dateMenu = false">Cancel</v-btn>
-                <v-btn flat color="primary" @click="$refs.menu.save(dateString)">OK</v-btn>
-            </v-date-picker>
-        </v-menu>
-    </v-form>
+<template lang="pug">
+    v-form
+        v-text-field(
+        label="Amount"
+        @keypress="updateAmount"
+        :value="expense.cents | currency"
+        type="text"
+        class="amount"
+        readonly
+        )
+        v-text-field(
+        label="Description"
+        v-model="expense.description"
+        type="text"
+        class="description"
+        )
+        v-menu(
+        ref="menu"
+        v-model="dateMenu"
+        lazy
+        min-width="290px"
+        full-width
+        offset-y
+        :nudge-right="40"
+        :close-on-content-click="false"
+        :return-value.sync="dateString"
+        )
+            v-text-field(
+            slot="activator"
+            label="Date"
+            :value="this.expense.date.toLocaleDateString()"
+            prepend-icon="event"
+            readonly
+            )
+            v-date-picker(v-model="dateString" no-title scrollable)
+                v-spacer
+                v-btn(flat color="primary" @click="dateMenu = false") Cancel
+                v-btn(flat color="primary" @click="$refs.menu.save(dateString)") OK
 </template>
 
 <script lang="ts">
