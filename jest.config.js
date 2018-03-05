@@ -17,5 +17,4 @@ module.exports = {
   snapshotSerializers: [
     'jest-serializer-vue'
   ],
-  mapCoverage: true
 }
