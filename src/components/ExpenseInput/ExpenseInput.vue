@@ -28,7 +28,7 @@
             v-text-field(
             slot="activator"
             label="Date"
-            :value="this.expense.date.toLocaleDateString()"
+            :value="this.expense.date | date"
             prepend-icon="event"
             readonly
             )
