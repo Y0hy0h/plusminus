@@ -1,9 +1,8 @@
-import { shallow } from '@vue/test-utils'
+import { mount, shallow } from '@vue/test-utils'
 
 import lolex from 'lolex'
 
 import ExpenseCreation from '@/components/ExpenseInput/ExpenseCreation.vue'
-import { Expense } from '@/model/expense.ts'
 
 
 describe('ExpenseCreation.vue', () => {
@@ -12,12 +11,27 @@ describe('ExpenseCreation.vue', () => {
     const clock = lolex.install({
       now: today,
     })
-    const wrapper = shallow(ExpenseCreation, {
-      propsData: {
-        expense: new Expense(0, today),
-      },
-    })
-    expect(wrapper.props().expense.date).toEqual(today)
+    const wrapper = shallow(ExpenseCreation)
+    expect(wrapper.vm.expense.date).toEqual(today)
     clock.uninstall()
   })
+
+  it('should pass expense when committing', () => {
+    const wrapper = shallow(ExpenseCreation)
+    const oldExpense = wrapper.vm.expense
+
+    wrapper.vm.commitExpense()
+
+    expect(wrapper.emitted()['commit-expense']).toEqual([[oldExpense]])
+  })
+
+  it('should create new expense when committing', () => {
+    const wrapper = mount(ExpenseCreation)
+    const oldExpense = wrapper.vm.expense
+
+    wrapper.vm.commitExpense()
+
+    expect(wrapper.vm.expense).not.toBe(oldExpense)
+  })
 })
+
