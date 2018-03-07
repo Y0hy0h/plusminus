@@ -6,7 +6,7 @@ import ExpenseCreation from '@/components/ExpenseInput/ExpenseCreation.vue'
 
 
 describe('ExpenseCreation.vue', () => {
-  it('should initialize the expense\'s date to current day', () => {
+  it('initializes the expense\'s date to current day', () => {
     const today = new Date('2018-02-14')
     const clock = lolex.install({
       now: today,
@@ -16,7 +16,7 @@ describe('ExpenseCreation.vue', () => {
     clock.uninstall()
   })
 
-  it('should pass expense when committing', () => {
+  it('passes expense when committing', () => {
     const wrapper = shallow(ExpenseCreation)
     const oldExpense = wrapper.vm.expense
 
@@ -25,7 +25,7 @@ describe('ExpenseCreation.vue', () => {
     expect(wrapper.emitted()['commit-expense']).toEqual([[oldExpense]])
   })
 
-  it('should create new expense when committing', () => {
+  it('creates new expense when committing', () => {
     const wrapper = mount(ExpenseCreation)
     const oldExpense = wrapper.vm.expense
 

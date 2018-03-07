@@ -16,14 +16,14 @@ describe('intl filter', () => {
   })
 
   describe('currency filter', () => {
-    it('should format given integer correctly', () => {
+    it('formats given integer correctly', () => {
       const cents = 3214
       expect(currencyFilter(cents)).toEqual('32,14 €')
     })
   })
 
   describe('date filter', () => {
-    it('should format given date correctly', () => {
+    it('formats given date correctly', () => {
       const date = new Date('2018-02-14')
       expect(dateFilter(date)).toEqual('14.02.2018')
     })
