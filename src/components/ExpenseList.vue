@@ -1,8 +1,8 @@
 <template lang="pug">
     v-list(two-line class="expense-list")
         ExpenseItem(
-        :expense="expense"
         v-for="expense in allExpenses"
+        :expense="expense"
         @delete-expense="deleteExpense"
         @selected="itemSelected"
         )
