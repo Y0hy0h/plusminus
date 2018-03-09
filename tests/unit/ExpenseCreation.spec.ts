@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { mount, shallow } from '@vue/test-utils'
 
 import lolex from 'lolex'
@@ -16,22 +17,24 @@ describe('ExpenseCreation.vue', () => {
     clock.uninstall()
   })
 
-  it('passes expense when committing', () => {
+  it('passes expense when save button is pressed', () => {
     const wrapper = shallow(ExpenseCreation)
     const oldExpense = wrapper.vm.expense
 
-    wrapper.vm.commitExpense()
+    wrapper.find('v-btn').trigger('click')
 
     expect(wrapper.emitted()['commit-expense']).toEqual([[oldExpense]])
   })
 
-  it('creates new expense when committing', () => {
+  it('creates new expense when save button is pressed', () => {
     const wrapper = mount(ExpenseCreation)
     const oldExpense = wrapper.vm.expense
 
-    wrapper.vm.commitExpense()
+    wrapper.find('v-btn').trigger('click')
 
-    expect(wrapper.vm.expense).not.toBe(oldExpense)
+    Vue.nextTick().then(() => {
+      expect(wrapper.vm.expense).not.toBe(oldExpense)
+    })
   })
 })
 
