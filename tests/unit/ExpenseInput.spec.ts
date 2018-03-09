@@ -29,15 +29,11 @@ describe('ExpenseInput.vue', () => {
     const amountInput = wrapper.find('.amount')
     amountInput.trigger('keypress', {key: 'Backspace'})
 
-    return Vue.nextTick().then(() => {
-      expect(emittedExpense(wrapper).cents).toEqual(12)
+    expect(emittedExpense(wrapper).cents).toEqual(12)
 
-      amountInput.trigger('keypress', {key: 'Delete'})
+    amountInput.trigger('keypress', {key: 'Delete'})
 
-      return Vue.nextTick()
-    }).then(() => {
-      expect(emittedExpense(wrapper).cents).toEqual(1)
-    })
+    expect(emittedExpense(wrapper).cents).toEqual(1)
 
   })
 
@@ -53,9 +49,7 @@ describe('ExpenseInput.vue', () => {
     amountInput.trigger('keypress', {key: ','})
     amountInput.trigger('keypress', {key: '€'})
 
-    return Vue.nextTick().then(() => {
-      expect(wrapper.emitted().change).toBeUndefined()
-    })
+    expect(wrapper.emitted().change).toBeUndefined()
   })
 })
 

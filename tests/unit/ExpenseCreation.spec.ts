@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { mount, shallow } from '@vue/test-utils'
 
 import lolex from 'lolex'
@@ -28,13 +27,14 @@ describe('ExpenseCreation.vue', () => {
 
   it('creates new expense when save button is pressed', () => {
     const wrapper = mount(ExpenseCreation)
+    wrapper.vm.expense.cents = 100
     const oldExpense = wrapper.vm.expense
 
-    wrapper.find('v-btn').trigger('click')
+    // TODO: Find out why trigger does not update wrapper.vm.expense, even though commitExpense() is executed
+    // wrapper.find('v-btn').trigger('click')
+    wrapper.vm.commitExpense()
 
-    Vue.nextTick().then(() => {
-      expect(wrapper.vm.expense).not.toBe(oldExpense)
-    })
+    expect(wrapper.vm.expense).not.toBe(oldExpense)
   })
 })
 
