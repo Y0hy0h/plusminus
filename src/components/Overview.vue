@@ -21,7 +21,7 @@
     },
   })
   export default class Overview extends Vue {
-    private activeExpense: Expense | null = null
+    private activeExpense: Expense | null = null  // null means event creation, active means update
 
     get allExpenses(): Expense[] {
       return this.$store.state.allExpenses
