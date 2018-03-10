@@ -17,7 +17,7 @@ describe('ExpenseUpdate.vue', () => {
     expect(wrapper.vm.expense).not.toBe(propExpense)
   })
 
-  it('copies prop expense when that is updated', () => {
+  it('copies prop expense when that is updated', async () => {
     const propExpense = new Expense(10, new Date('2018-03-09'))
     const wrapper = mount(ExpenseUpdate, {
       propsData: {
@@ -28,11 +28,9 @@ describe('ExpenseUpdate.vue', () => {
     const newPropExpense = new Expense(20, new Date('2018-04-09'))
     wrapper.vm.expenseToUpdate = newPropExpense
 
-    // TODO: .nextTick() feels unnecessary, bug in vue-test-utils or unit-jest?
-    Vue.nextTick().then(() => {
-      expect(wrapper.vm.expense).toEqual(newPropExpense)
-      expect(wrapper.vm.expense).not.toBe(newPropExpense)
-    })
+    await Vue.nextTick()
+    expect(wrapper.vm.expense).toEqual(newPropExpense)
+    expect(wrapper.vm.expense).not.toBe(newPropExpense)
   })
 
   it('detects when expense has been changed', () => {
