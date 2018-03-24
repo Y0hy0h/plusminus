@@ -23,11 +23,15 @@
             v-btn(flat color="primary" @click="$refs.menu.save(dateString)") OK</template>
 
 <script lang="ts">
-  import { Component, Model, Vue } from 'vue-property-decorator'
+  import { Component, Model, Prop, Vue } from 'vue-property-decorator'
 
   @Component
   export default class DatePickerField extends Vue {
-    @Model('change') private date!: Date
+    // TODO: Remove this fix for runtime error:
+    // 'Invalid prop: type check failed for prop "date". Expected Object, got Date.'
+    @Prop({type: Date})
+    @Model()
+    private date: Date
 
     private dateMenu: boolean = false
 
