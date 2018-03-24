@@ -3,7 +3,7 @@
         v-card-text
             ExpenseInput(v-model="expense")
         v-card-actions
-            v-btn(@click="commitExpense") Save
+            v-btn.save(@click="commitExpense") Save
 </template>
 
 <script lang="ts">

@@ -1,18 +1,16 @@
 <template lang="pug">
     v-form
-        v-text-field(
+        v-text-field.amount(
         label="Amount"
         @keypress="updateAmount"
         :value="expense.cents | currency"
         type="text"
-        class="amount"
         readonly
         )
-        v-text-field(
+        v-text-field.description(
         label="Description"
         v-model="expense.description"
         type="text"
-        class="description"
         )
         DatePickerField(v-model="expense.date")
 </template>
