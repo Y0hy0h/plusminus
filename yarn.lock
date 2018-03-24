@@ -8313,9 +8313,9 @@ vuetify@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.0.5.tgz#10e83123a78c82e3d9c2efe6734b7f55ba678dd4"
 
-vuex-persist@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/vuex-persist/-/vuex-persist-1.1.4.tgz#eaec0645a7dda073aeeee5b6be63ca6b5d7b38c6"
+vuex-persist@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/vuex-persist/-/vuex-persist-1.1.5.tgz#d77db7e10fb8706cf5945b84b7563a518f96db62"
   dependencies:
     lodash.merge "^4.6.1"
 
