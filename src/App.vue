@@ -1,9 +1,6 @@
 <template lang="pug">
     #app
-        v-app
-            v-content
-                v-container
-                    Overview
+        Overview.overview
 </template>
 
 
@@ -22,7 +19,7 @@
 
 
 <style lang="stylus">
-    @import '~vuetify/src/stylus/main'
+    @import '~vue-material/dist/vue-material.min.css'
 
     #app
         font-family: 'Avenir', Helvetica, Arial, sans-serif
@@ -31,7 +28,8 @@
         text-align: center
         color: #2c3e50
 
-    #app .container
+    #app .overview
         max-width: 800px
+        margin: auto
 
 </style>

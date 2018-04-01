@@ -1,7 +1,8 @@
 <template lang="pug">
-    .overview
-        ExpenseCreation(v-if="activeExpense === null" @commit-expense="commitExpense")
-        ExpenseUpdate(v-else :expense-to-update="activeExpense" @commit-expense="commitExpense" @cancel="cancel")
+    .overview.md-elevation-3
+        md-content.input.md-elevation-2
+            ExpenseCreation(v-if="activeExpense === null" @commit-expense="commitExpense")
+            ExpenseUpdate(v-else :expense-to-update="activeExpense" @commit-expense="commitExpense" @cancel="cancel")
         ExpenseList(:all-expenses="allExpenses" @delete-expense="deleteExpense" @item-selected="itemSelected")
 </template>
 
@@ -54,4 +55,10 @@
 </script>
 
 <style scoped lang="stylus">
+    .overview
+        overflow: auto
+
+    .input
+        position: relative
+        z-index: 10
 </style>

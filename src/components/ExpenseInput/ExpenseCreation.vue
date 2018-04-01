@@ -1,9 +1,9 @@
 <template lang="pug">
-    v-card
-        v-card-text
+    div
+        md-card-content
             ExpenseInput(v-model="expense")
-        v-card-actions
-            v-btn.save(@click="commitExpense") Save
+        md-card-actions(md-alignment="left")
+            md-button.save(@click="commitExpense") Save
 </template>
 
 <script lang="ts">

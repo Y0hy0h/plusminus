@@ -1,15 +1,16 @@
 <template lang="pug">
-    v-list-tile(@click="itemSelected")
-        v-list-tile-content
-            v-list-tile-title {{ expense.cents | currency }}
-            v-list-tile-sub-title {{ expense.date | date }} | {{ expense.description }}
-        v-list-tile-action
-            v-btn(icon @click="deleteExpense")
-                v-icon(color="grey lighten-1") clear
+    md-list-item(@click="itemSelected")
+        .md-list-item-text
+            span {{ expense.cents | currency }}
+            span {{ expense.date | date }} | {{ expense.description }}
+        .md-list-action
+            md-button(icon @click="deleteExpense")
+                md-icon clear
 </template>
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+
   import { Expense } from '../model/expense'
 
   @Component

@@ -20,7 +20,7 @@ describe('ExpenseCreation.vue', () => {
     const wrapper = shallow(ExpenseCreation)
     const oldExpense = wrapper.vm.expense
 
-    wrapper.find('v-btn').trigger('click')
+    wrapper.find('md-button').trigger('click')
 
     expect(wrapper.emitted()['commit-expense']).toEqual([[oldExpense]])
   })

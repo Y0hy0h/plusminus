@@ -1,10 +1,10 @@
 <template lang="pug">
-    v-card
-        v-card-text
+    div
+        md-card-content
             ExpenseInput(v-model="expense")
-        v-card-actions
-            v-btn(:disabled="!expenseChanged" @click="commitExpense") Update
-            v-btn(@click="cancel") Cancel
+        md-card-actions(md-alignment="left")
+            md-button(:disabled="!expenseChanged" @click="commitExpense") Update
+            md-button(@click="cancel") Cancel
 </template>
 
 <script lang="ts">

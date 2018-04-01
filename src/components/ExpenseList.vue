@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-list(two-line class="expense-list")
+    md-list(class="expense-list md-double-line")
         ExpenseItem(
         v-for="expense in allExpenses"
         :expense="expense"
@@ -10,7 +10,9 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+
   import ExpenseItem from '@/components/ExpenseItem.vue'
+
   import { Expense } from '@/model/expense'
 
   @Component({

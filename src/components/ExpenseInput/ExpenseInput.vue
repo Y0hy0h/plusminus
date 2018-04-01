@@ -1,31 +1,28 @@
 <template lang="pug">
-    v-form
-        v-text-field.amount(
-        label="Amount"
-        @keypress="updateAmount"
-        :value="expense.cents | currency"
-        type="text"
-        readonly
-        )
-        v-text-field.description(
-        label="Description"
-        v-model="expense.description"
-        type="text"
-        )
-        DatePickerField(v-model="expense.date")
+    form
+        md-field
+            label Amount
+            md-input.amount(
+            @keypress="updateAmount"
+            :value="expense.cents | currency"
+            type="text"
+            readonly
+            )
+        md-field
+            label Description
+            md-input.description(
+            v-model="expense.description"
+            type="text"
+            )
+        md-datepicker(v-model="expense.date")
 </template>
 
 <script lang="ts">
   import { Component, Model, Vue } from 'vue-property-decorator'
 
-  import DatePickerField from '@/components/ExpenseInput/DatePickerField.vue'
   import { Expense } from '@/model/expense'
 
-  @Component({
-    components: {
-      DatePickerField,
-    },
-  })
+  @Component
   export default class ExpenseInput extends Vue {
     @Model('change') private expense!: Expense
 
