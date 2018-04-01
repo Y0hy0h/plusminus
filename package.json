@@ -11,19 +11,19 @@
   },
   "dependencies": {
     "cerialize": "^0.1.18",
-    "localforage": "^1.6.0",
+    "localforage": "^1.7.1",
     "lodash": "^4.17.5",
-    "luxon": "^0.5.3",
+    "luxon": "^1.0.0",
     "pug": "^2.0.3",
-    "pug-loader": "^2.3.0",
+    "pug-loader": "^2.4.0",
     "register-service-worker": "^1.1.1",
     "vue": "^2.5.13",
     "vue-class-component": "^6.2.0",
-    "vue-material": "^1.0.0-beta-7",
+    "vue-material": "^1.0.0-beta-8",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "vuex-persist": "^1.1.5"
+    "vuex-persist": "^1.1.6"
   },
   "devDependencies": {
     "@types/intl": "^1.2.0",
@@ -40,7 +40,7 @@
     "@vue/test-utils": "<=1.0.0-beta.11 || >1.0.0-beta.12",
     "babel-core": "^7.0.0-0",
     "intl": "^1.2.5",
-    "lint-staged": "^7.0.0",
+    "lint-staged": "^7.0.2",
     "lolex": "^2.3.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
