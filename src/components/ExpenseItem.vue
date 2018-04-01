@@ -4,7 +4,7 @@
             span {{ expense.cents | currency }}
             span {{ expense.date | date }} | {{ expense.description }}
         .md-list-action
-            md-button(icon @click="deleteExpense")
+            md-button.md-icon-button(@click="deleteExpense")
                 md-icon clear
 </template>
 
