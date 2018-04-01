@@ -20,6 +20,7 @@
 
 <style lang="stylus">
     @import '~vue-material/dist/vue-material.min.css'
+    @import '~vue-material/dist/theme/default.css'
 
     #app
         font-family: 'Avenir', Helvetica, Arial, sans-serif
