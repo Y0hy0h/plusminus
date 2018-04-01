@@ -1,8 +1,14 @@
 import Vue from 'vue'
-import { mount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
+import installFilters from '@/filters'
+import installMaterial from '@/materialDesign'
 
 import ExpenseUpdate from '@/components/ExpenseInput/ExpenseUpdate.vue'
 import { Expense } from '@/model/expense'
+
+const localVue = createLocalVue()
+installFilters(localVue)
+installMaterial(localVue)
 
 describe('ExpenseUpdate.vue', () => {
   it('copies the prop expense', () => {
@@ -11,6 +17,7 @@ describe('ExpenseUpdate.vue', () => {
       propsData: {
         expenseToUpdate: propExpense,
       },
+      localVue,
     })
 
     expect(wrapper.vm.expense).toEqual(propExpense)
@@ -23,6 +30,7 @@ describe('ExpenseUpdate.vue', () => {
       propsData: {
         expenseToUpdate: propExpense,
       },
+      localVue,
     })
 
     const newPropExpense = new Expense(20, new Date('2018-04-09'))
@@ -39,6 +47,7 @@ describe('ExpenseUpdate.vue', () => {
       propsData: {
         expenseToUpdate: propExpense,
       },
+      localVue,
     })
 
     expect(wrapper.vm.expenseChanged).toEqual(false)

@@ -1,4 +1,6 @@
-import Vue from 'vue'
+import 'babel-polyfill'
+import { Vue } from 'vue/types/vue'
+import { VueConstructor } from 'vue'
 
 import {
   MdButton,
@@ -11,11 +13,13 @@ import {
   MdList,
 } from 'vue-material/dist/components'
 
-Vue.use(MdContent)
-Vue.use(MdDivider)
-Vue.use(MdList)
-Vue.use(MdButton)
-Vue.use(MdIcon)
-Vue.use(MdCard)
-Vue.use(MdField)
-Vue.use(MdDatepicker)
+export default (vueInstance: VueConstructor<Vue>) => {
+  vueInstance.use(MdContent)
+  vueInstance.use(MdDivider)
+  vueInstance.use(MdList)
+  vueInstance.use(MdButton)
+  vueInstance.use(MdIcon)
+  vueInstance.use(MdCard)
+  vueInstance.use(MdField)
+  vueInstance.use(MdDatepicker)
+}

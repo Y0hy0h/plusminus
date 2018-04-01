@@ -1,4 +1,5 @@
-import Vue from 'vue'
+import { Vue } from 'vue/types/vue'
+import { VueConstructor } from 'vue'
 
 import { DateTime } from 'luxon'
 
@@ -10,8 +11,6 @@ export function currencyFilter(value: number): string {
   return currencyFormatter.format(value / 100)
 }
 
-Vue.filter('currency', currencyFilter)
-
 export function dateFilter(value: Date): string {
   const date = DateTime.fromJSDate(value)
   return date.setLocale('de-DE').toLocaleString({
@@ -22,4 +21,7 @@ export function dateFilter(value: Date): string {
   })
 }
 
-Vue.filter('date', dateFilter)
+export default (vueInstance: VueConstructor<Vue>) => {
+  vueInstance.filter('currency', currencyFilter)
+  vueInstance.filter('date', dateFilter)
+}

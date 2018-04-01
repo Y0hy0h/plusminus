@@ -1,8 +1,14 @@
-import { mount, shallow } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
+import installFilters from '@/filters'
+import installMaterial from '@/materialDesign'
 
 import lolex from 'lolex'
 
 import ExpenseCreation from '@/components/ExpenseInput/ExpenseCreation.vue'
+
+const localVue = createLocalVue()
+installFilters(localVue)
+installMaterial(localVue)
 
 
 describe('ExpenseCreation.vue', () => {
@@ -11,13 +17,17 @@ describe('ExpenseCreation.vue', () => {
     const clock = lolex.install({
       now: today,
     })
-    const wrapper = shallow(ExpenseCreation)
+    const wrapper = mount(ExpenseCreation, {
+      localVue,
+    })
     expect(wrapper.vm.expense.date).toEqual(today)
     clock.uninstall()
   })
 
   it('passes expense when save button is pressed', () => {
-    const wrapper = shallow(ExpenseCreation)
+    const wrapper = mount(ExpenseCreation, {
+      localVue,
+    })
     const oldExpense = wrapper.vm.expense
 
     wrapper.find('md-button').trigger('click')
@@ -26,7 +36,9 @@ describe('ExpenseCreation.vue', () => {
   })
 
   it('creates new expense when save button is pressed', () => {
-    const wrapper = mount(ExpenseCreation)
+    const wrapper = mount(ExpenseCreation, {
+      localVue,
+    })
     wrapper.vm.expense.cents = 100
     const oldExpense = wrapper.vm.expense
 

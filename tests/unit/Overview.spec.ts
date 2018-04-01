@@ -1,12 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { mount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
+import installFilters from '@/filters'
+import installMaterial from '@/materialDesign'
 
 import Overview from '@/components/Overview.vue'
 import ExpenseCreation from '@/components/ExpenseInput/ExpenseCreation.vue'
 import ExpenseUpdate from '@/components/ExpenseInput/ExpenseUpdate.vue'
 import { Expense } from '@/model/expense'
 import { mutations } from '@/store'
+
+const localVue = createLocalVue()
+installFilters(localVue)
+installMaterial(localVue)
 
 describe('Overview.vue', () => {
   it('initially has no active expense, then sets active expense when item was selected', () => {
@@ -16,6 +22,7 @@ describe('Overview.vue', () => {
       computed: {
         allExpenses: () => allExpenses,
       },
+      localVue,
     })
 
     expect(wrapper.vm.activeExpense).toBeNull()
@@ -37,6 +44,7 @@ describe('Overview.vue', () => {
       computed: {
         allExpenses: () => allExpenses,
       },
+      localVue,
     })
 
     expect(wrapper.vm.activeExpense).toBe(expense)
@@ -62,6 +70,7 @@ describe('Overview.vue', () => {
           allExpenses: () => allExpenses,
         },
         store,
+        localVue,
       })
 
       wrapper.vm.activeExpense = null
@@ -82,6 +91,7 @@ describe('Overview.vue', () => {
           allExpenses: () => allExpenses,
         },
         store,
+        localVue,
       })
 
       const newExpense = new Expense(15, new Date())
@@ -101,6 +111,7 @@ describe('Overview.vue', () => {
           allExpenses: () => allExpenses,
         },
         store,
+        localVue,
       })
 
       const newExpense = new Expense(15, new Date())
@@ -120,6 +131,7 @@ describe('Overview.vue', () => {
           allExpenses: () => allExpenses,
         },
         store,
+        localVue,
       })
 
       wrapper.vm.deleteExpense(expense)
@@ -140,6 +152,7 @@ describe('Overview.vue', () => {
           allExpenses: () => allExpenses,
         },
         store,
+        localVue,
       })
 
       wrapper.vm.deleteExpense(expenseToDelete)

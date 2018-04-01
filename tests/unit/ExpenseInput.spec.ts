@@ -1,8 +1,12 @@
 import Vue from 'vue'
-import { mount, Wrapper } from '@vue/test-utils'
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils'
+import installMaterial from '@/materialDesign'
 
 import ExpenseInput from '@/components/ExpenseInput/ExpenseInput.vue'
 import { Expense } from '@/model/expense'
+
+const localVue = createLocalVue()
+installMaterial(localVue)
 
 describe('ExpenseInput.vue', () => {
   it('sets input number as expense\'s cents', () => {
@@ -10,6 +14,7 @@ describe('ExpenseInput.vue', () => {
       propsData: {
         expense: new Expense(0, new Date('2018-03-09')),
       },
+      localVue,
     })
 
     const amountInput = wrapper.find('.amount')
@@ -24,6 +29,7 @@ describe('ExpenseInput.vue', () => {
       propsData: {
         expense: new Expense(123, new Date('2018-03-09')),
       },
+      localVue,
     })
 
     const amountInput = wrapper.find('.amount')
@@ -42,6 +48,7 @@ describe('ExpenseInput.vue', () => {
       propsData: {
         expense: new Expense(0, new Date('2018-03-09')),
       },
+      localVue,
     })
 
     const amountInput = wrapper.find('.amount')
