@@ -47,9 +47,6 @@
     "ts-jest": "^22.4.2",
     "vue-template-compiler": "^2.5.16"
   },
-  "resolutions": {
-    "vue-template-compiler": "2.5.16"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
